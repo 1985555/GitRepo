@@ -17,7 +17,7 @@ class App extends Component{  //the component's name must start with an upper ca
    // Every component also requires a render() method, this method returns HTML.
 constructor(){
   super();
-  this.state = {id:1, name:'Fafa'}; 
+  this.state = {id:1, name:'Fafa', Male:"M", Country:{ ID:3, Name:"KSA" } }; 
   //In React, component properties should be kept in an object called state.
 }
 
@@ -25,19 +25,42 @@ shoot() {
   console.log("Great Shot!");
 }
 
+SetCountry =(event) => {
+  this.setState({ ID : event.target.value });
+}
+
+ChangeGender = (event) => {
+  this.setState({ Male: event.target.value });
+}
+
 ChangeName = (event) => {
-  this.setState({ name: event.target.value});
+  this.setState({ name: event.target.value });
 }
     render(){
       return (
       <div className="App">
         <LikeAngularDirective/>
         <p>hello word { 5+5 }, name = { this.state.name }</p>
-        
-          <input type="text" defaultValue={this.state.id}/>
-          <input type="text" defaultValue={this.state.name} onChange={ this.ChangeName }/>
+
+          <select value={this.state.Country.id} onChange={this.SetCountry}>
+            <option value="<-- Select Company -->"></option>
+            <option value="1">USA</option>
+            <option value="2">Germany</option>
+            <option value="3">KSA</option>
+          </select> you have selected { this.state.Country.Name }
+
+          <input type="text" defaultValue={this.state.id}/><br/>
+          <input type="text" defaultValue={this.state.name} onChange={ this.ChangeName }/><br/>
+          Male <input type="radio" name="gender" value="M" 
+                      checked={ this.state.Male === "M"} 
+                      onChange={ this.ChangeGender }/>
+          <br/>
+          Female <input type="radio" name="gender" value="F" 
+                        checked={ this.state.Male === "F"}
+                        onChange={ this.ChangeGender }/>
+          <br/>          
           <button onClick={this.shoot}>Take the shot!</button>
-        
+          the gender now is : { this.state.Male } 
       </div>);
     }
  }

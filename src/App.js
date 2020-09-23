@@ -1,5 +1,7 @@
-import React from 'react';
-import {Component} from 'react';
+import React, { Component } from 'react';
+
+import Contacts from './Components/Contacts';
+import User from './Components/User';
 
 //import logo from './logo.svg';
 import './App.css';
@@ -8,60 +10,36 @@ import './App.css';
 //but Class components have some additions, and will be preferred in this tutorial. 
 // example function Car () ... end then .render(<Car/>, getelementby...)
 //function App() {
-class LikeAngularDirective extends Component{
-  render(){
-    return <p className="cpmt">this is a component, called from App component ...</p>
-  }
-}
+
 class App extends Component{  //the component's name must start with an upper case letter.
    // Every component also requires a render() method, this method returns HTML.
-constructor(){
-  super();
-  this.state = {id:1, name:'Fafa', Male:"M", Country:{ ID:3, Name:"KSA" } }; 
+constructor(props){
+  super(props);
+  this.state = { 
+    items:[], 
+    isLoaded: false,
+  };
+  // All React components must act like pure functions(must never modify its own props) 
+  // with respect to their props.
   //In React, component properties should be kept in an object called state.
-}
+}   
 
-shoot() {
-  console.log("Great Shot!");
-}
 
-SetCountry =(event) => {
-  this.setState({ ID : event.target.value });
-}
-
-ChangeGender = (event) => {
-  this.setState({ Male: event.target.value });
-}
-
-ChangeName = (event) => {
-  this.setState({ name: event.target.value });
-}
-    render(){
+render(){
       return (
-      <div className="App">
-        <LikeAngularDirective/>
-        <p>hello word { 5+5 }, name = { this.state.name }</p>
-
-          <select value={this.state.Country.id} onChange={this.SetCountry}>
-            <option value="<-- Select Company -->"></option>
-            <option value="1">USA</option>
-            <option value="2">Germany</option>
-            <option value="3">KSA</option>
-          </select> you have selected { this.state.Country.Name }
-
-          <input type="text" defaultValue={this.state.id}/><br/>
-          <input type="text" defaultValue={this.state.name} onChange={ this.ChangeName }/><br/>
-          Male <input type="radio" name="gender" value="M" 
-                      checked={ this.state.Male === "M"} 
-                      onChange={ this.ChangeGender }/>
-          <br/>
-          Female <input type="radio" name="gender" value="F" 
-                        checked={ this.state.Male === "F"}
-                        onChange={ this.ChangeGender }/>
-          <br/>          
-          <button onClick={this.shoot}>Take the shot!</button>
-          the gender now is : { this.state.Male } 
-      </div>);
+        <div className="container">
+          {/* <div className="row">
+            <div className="col-md-12">
+              <Contacts />
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-md-12">
+              <User text="this is a text showing using props "/>
+            </div>
+          </div> */}
+        </div>
+      );
     }
  }
 /*

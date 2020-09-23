@@ -14,7 +14,7 @@ import './App.css';
 class App extends Component{  //the component's name must start with an upper case letter.
    // Every component also requires a render() method, this method returns HTML.
 constructor(props){
-  super(props);
+  super();
   this.state = { 
     items:[], 
     isLoaded: false,
@@ -24,11 +24,31 @@ constructor(props){
   //In React, component properties should be kept in an object called state.
 }   
 
+componentDidMount(){
+  fetch('https://jsonplaceholder.typicode.com/users')
+  .then(res => res.json())
+  .then(json => {
+    this.setState({
+      items : json,
+      isLoaded : true
+    });
+  })
+};
+
 
 render(){
+
+      var { items, isLoaded } = this.state;
+      if(!isLoaded)
+      {
+        return (<div>Please wait, data is loading ...</div>);
+      }
+else
+{
+
       return (
         <div className="container">
-          {/* <div className="row">
+           <div className="row">
             <div className="col-md-12">
               <Contacts />
             </div>
@@ -37,9 +57,16 @@ render(){
             <div className="col-md-12">
               <User text="this is a text showing using props "/>
             </div>
-          </div> */}
+          </div>
+          <hr/> data fetched from API 
+          <div>
+            <ul>
+              { items.map(item => (<li key={item.id}>{ item.name }</li>)) }
+            </ul>
+          </div>
         </div>
       );
+        }
     }
  }
 /*

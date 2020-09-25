@@ -10,11 +10,11 @@ class ContactsForm extends Component{
         this.state = {id:1, name:'Fafa', Male:"M", Country:{ ID:3, Name:"KSA" } }; 
     }
     
-    shoot() {
+    shoot = () => {
         console.log("Great Shot!");
       }
       
-      SetCountry =(event) => {
+      SetCountry = (event) => {
         this.setState({ id : event.target.value });
       }
       

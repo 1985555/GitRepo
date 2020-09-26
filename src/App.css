@@ -6,6 +6,11 @@
   height: 40vmin;
   pointer-events: none;
 }
+
+#pagination{
+height:220px;
+}
+
 .cpmt{
   border: solid 1px;
   color: #282c34;

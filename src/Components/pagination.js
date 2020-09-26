@@ -22,8 +22,6 @@ return(
       </ul>
     </nav>
 );
-
-
 }
 
 export default Pagination

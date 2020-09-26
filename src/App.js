@@ -89,6 +89,29 @@ const AddData = () => {
     console.log(e);
   }
 };
+const [sortingType, changesorting ] = useState('asc');
+
+const sortByName = () => {
+//   sorting by ID: desc and asc
+  const b = items.sort( (a, b) => {
+      if(sortingType === 'desc')
+      if(a.name.toLowerCase() < b.name.toLowerCase())
+      return -1;
+      if(sortingType === 'asc')
+      if(a.name.toLowerCase() > b.name.toLowerCase())
+      return -1;
+  });
+  updateItems(b);
+  sortingType === 'desc' ? changesorting('asc') : changesorting('desc');
+}
+
+// sorting by id: desc and asc
+  /*const b = items.sort( (a, b) => 
+    sortingType === 'desc' ? parseInt(a['id']) - parseInt(b['id']) : parseInt(b['id']) - parseInt(a['id'])
+  );
+  updateItems(b);
+  sortingType === 'desc' ? changesorting('asc') : changesorting('desc');
+}*/
 
 //render(){
       //var { items, isLoaded } = this.state;
@@ -99,6 +122,28 @@ else
   {
     return (
       <div className="container">
+
+<div id="pagination">
+        <table className="table"><thead><tr>
+          <th> Id </th>
+          <th> Name <button onClick={ sortByName }>V</button></th>
+          <th> Email </th></tr></thead>
+        <tbody>
+        { currentItems.map(item => (
+        <tr key={ item.id }>
+          <td>{ item.id }</td><td>{ item.name }</td><td>{ item.email }</td>
+        </tr>)
+        ) }
+        </tbody>
+        </table>
+        </div>
+        <hr color="black"/>
+        {/* the pagination needs only nbOfAllEle and nbOfElePerPage */}
+        <Pagination numberOfitems={ items.length } 
+                    itemperpage={ itemperpage } 
+                    paginate={ paginate }/>
+                    {/* in the paginate function, you don't need to pass the argument  */}
+
         <div className="row">
         <div className="col-md-12">
           <Contacts />
@@ -118,17 +163,6 @@ else
         type="submit" 
         onClick={ () => increment(count + 1) }> increment </button>
 
-        <ul>
-        { currentItems.map(item => (
-        <li key={ item.id }>
-        Name:{ item.name } | Email:{ item.email }
-        </li>)
-        ) }
-        </ul>
-        <hr/>
-        <Pagination numberOfitems={ items.length } 
-                    itemperpage={ itemperpage } 
-                    paginate={ paginate }/>
         </div>
       </div>
     );

@@ -98,24 +98,6 @@ useEffect(() => { // <--- this hook run every time the page render, unless you a
 },[]);// [] means it only will runs when it mounts, which is what we want. 
 //},[count]);  this line means whenever the count variable changed, useEffect is called again.
 
-const DataToShow = useMemo (() => {
-
-    var users = items;
-
-    if(searchedText){
-      users = users.filter(i => {
-        return i.name.toLowerCase().includes(searchedText.toLowerCase())
-      })
-      //updateNbItems(users.length);  //old code
-    }
-
-    updateNbItems(users.length);
-    var f = (currentPage - 1) * itemperpage;
-    return users.slice(f, f + itemperpage);
-
-}, [items, currentPage, searchedText, itemperpage]);
-
-
 /*
 const [sortingType, changesorting ] = useState('asc');
 const sortByName = () => {
@@ -151,8 +133,26 @@ const sortByName = () => {
 });
 */
 
+const DataToShow = useMemo (() => {
+
+    var users = items;
+
+    if(searchedText){
+      users = users.filter(i => {
+        return i.name.toLowerCase().includes(searchedText.toLowerCase())
+      })
+      //updateNbItems(users.length);  //old code
+    }
+
+    updateNbItems(users.length);
+    var f = (currentPage - 1) * itemperpage;
+    console.log(" test ");
+    return users.slice(f, f + itemperpage);
+
+}, [items, currentPage, searchedText, itemperpage]);
+
 const setNb = (e) => {
-  setItemPerPage(e.target.value); 
+  setItemPerPage(e.target.value);
   setCurrenPage(1);
 }
 
@@ -164,16 +164,14 @@ else
       <div className="App">
 
       <div id="pagination">
-
       <hr color="black"/>
         <Pagination numberOfitems={ nbitems } 
                     itemperpage={ itemperpage } 
                     currentPage = { currentPage }
                     paginate={ number => setCurrenPage(number) }/>
       
-      <select onChange={ setNb } 
-              value={ itemperpage }>
-                
+      Items per page : <select onChange={ setNb } value={ itemperpage }>
+
         <option value="3">3</option>
         <option value="5">5</option>
         <option value="10">10</option>
@@ -207,25 +205,15 @@ else
 
         </div>
       
-        <div className="row">
-        <div className="col-md-12">
-          <Contacts />
-        </div>
-        </div>
-        <div className="row">
-        <div className="col-md-12">
-          {/* <User text="this is a text showing using props "/> */}
-        </div>
-        </div>
-        <hr color="black"/> data fetched from API
-        <div>
-        {/* <button className="btn btn-primary" 
+        {/* <div className="row">
+          <div className="col-md-12">
+            <Contacts />
+          </div>
+        </div> <User text="this is a text showing using props "/> 
+        <button className="btn btn-primary" 
         type="submit" 
-        onClick={ () => this.AddData }> Insert </button> */}
-        </div>
-
-           {/*  onClick={ sortByName } >
-        
+        onClick={ () => this.AddData }> Insert </button>
+        onClick={ sortByName } >
           { sortingType === 'desc' ? 
           <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-arrow-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
           <path fillRule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/>
@@ -236,9 +224,6 @@ else
         */}
 
       </div>
-
-         
-
     );
   }
 }

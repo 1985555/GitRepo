@@ -7,8 +7,22 @@
   pointer-events: none;
 }
 
+.heading{
+  display:flex;
+  align-items: center;
+}
+
+a:active{
+  background-color: red;
+}
+
 #pagination{
-height:220px;
+height:400px;
+}
+
+.searchInput{
+  margin-left: 15px;
+  width:100px;
 }
 
 .cpmt{

@@ -8,7 +8,7 @@ class Contacts extends Component{
 // modified in 15/2/2021  part 2
 // modification in archive branch
         super()
-        this.state = {}; // state object should be in the constructor
+        this.state = {};
     }
 
     render(){

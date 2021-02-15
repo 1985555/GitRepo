@@ -1,10 +1,11 @@
-
+﻿
 import React, { Component} from 'react';
 import ContactsForm from './ContactsForm';
 
 class Contacts extends Component{
 
     constructor(){
+// modified in 15/2/2021
         super()
         this.state = {}; // state object should be in the constructor
     }
